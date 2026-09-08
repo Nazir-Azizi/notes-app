@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+
 import './NotePage.css';
-import { useState } from "react";
+
 export function NotePage({ notes, setNotes }) {
+  
   const [titleText, setTitleText] = useState('');
   const [noteText, setNoteText] = useState('');
 
