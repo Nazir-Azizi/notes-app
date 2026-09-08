@@ -1,13 +1,17 @@
 import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
 import './NotePage.css';
 import { useState } from "react";
 export function NotePage({ notes, setNotes }) {
-  const navigate = useNavigate();
   const [titleText, setTitleText] = useState('');
   const [noteText, setNoteText] = useState('');
+
+  const navigate = useNavigate();
+  
   function saveTitleInputText(event) {
     setTitleText(event.target.value);
   }
+  
   function saveNoteText(event) {
     setNoteText(event.target.value);
   }
@@ -16,9 +20,9 @@ export function NotePage({ notes, setNotes }) {
       const newNote = [...notes];
       newNote.push({
         id: crypto.randomUUID(),
-        title: titleText,
-        text: noteText,
-        date: 'May 23, 2020'
+        title: titleText.trim(),
+        text: noteText.trim(),
+        date: dayjs().format('MMMM DD, YYYY')
       });
       setNotes(newNote);
       navigate('/');
