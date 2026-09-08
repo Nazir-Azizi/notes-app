@@ -1,0 +1,23 @@
+.note-form-container {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+}
+
+.title-input {
+  font-size: 2rem;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  margin-bottom: 20px;
+}
+
+.note-textarea {
+  flex: 1;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  border: none;
+  outline: none;
+  resize: none;
+  padding: 10px 0;
+}

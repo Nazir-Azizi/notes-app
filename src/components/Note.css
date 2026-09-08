@@ -1,0 +1,27 @@
+:root {
+  --note-bg-color: orange;
+}
+.orange {
+  --note-bg-color: orange;
+}
+.red {
+  --note-bg-color: red;
+}
+.blue {
+  --note-bg-color: blue;
+}
+
+.note-container {
+  background-color: var(--note-bg-color);
+  border-radius: 10px;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.note-info {
+  display: flex;
+  justify-content: space-between;
+}

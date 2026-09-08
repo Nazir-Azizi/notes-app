@@ -1,0 +1,18 @@
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.header-text{
+  font-size: 3rem;
+  margin-left: 30px;
+}
+.add-note-btn-container {
+  display: flex;
+  align-items: center;
+  margin-right: 30px;
+}
+.add-note-btn {
+  width: 50px;
+  height: 50px;
+}
