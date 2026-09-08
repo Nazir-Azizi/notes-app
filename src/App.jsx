@@ -1,26 +1,20 @@
-import { Notes } from './components/Notes'
-import { Header } from './components/Header';
-import './App.css'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from 'react';
+import { HomePage } from "./pages/HomePage";
+import { NotePage } from './pages/NotePage'
+import './App.css'
 
 function App() {
-  const [notes, setNotes] = useState([{
-    id: 1,
-    title: 'First Note',
-    text: 'This is my first note',
-    date: 'May 21, 2026'
-  },
-  {
-    id: 2,
-    title: 'Second Note',
-    text: 'This is my second note',
-    date: 'May 21, 2020'
-  }
-  ]);
+  const [notes, setNotes] = useState([]);
   return (
     <div className='app-container'>
-      <Header notes={notes} setNotes={setNotes} />
-      <Notes notes={notes} setNotes={setNotes} />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage notes={notes} setNotes={setNotes} />} />
+          <Route path="/notespage" element={<NotePage notes={notes} setNotes={setNotes} />} />
+        </Routes>
+      </BrowserRouter>
+
     </div>
   )
 }
