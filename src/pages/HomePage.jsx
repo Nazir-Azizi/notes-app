@@ -5,7 +5,7 @@ export function HomePage({ notes, setNotes }) {
   return (
     <>
       <Header />
-      <Notes notes={notes} />
+      <Notes notes={notes} setNotes={setNotes} />
     </>
   );
 }
