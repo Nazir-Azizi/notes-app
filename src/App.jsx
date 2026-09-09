@@ -8,7 +8,7 @@ function App() {
   const [notes, setNotes] = useState([]);
   return (
     <div className='app-container'>
-      <BrowserRouter>
+      <BrowserRouter basename="/notes-app">
         <Routes>
           <Route path="/" element={<HomePage notes={notes} setNotes={setNotes} />} />
           <Route path="/notesFormPage/:id" element={<NoteFormPage notes={notes} setNotes={setNotes} />} />
