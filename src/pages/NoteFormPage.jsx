@@ -1,32 +1,57 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 
 import './NoteFormPage.css';
 
 export function NoteFormPage({ notes, setNotes }) {
-  
+
   const [titleText, setTitleText] = useState('');
   const [noteText, setNoteText] = useState('');
+  const { id } = useParams();
 
   const navigate = useNavigate();
-  
+  useEffect(() => {
+    const note = notes.find(note => note.id === id);
+    if (note) {
+      setTitleText(note.title);
+      setNoteText(note.text);
+    }
+  }, []);
+
+
   function saveTitleInputText(event) {
     setTitleText(event.target.value);
   }
-  
+
   function saveNoteText(event) {
     setNoteText(event.target.value);
   }
   function saveNote() {
     if (titleText.trim().length != 0 || noteText.trim().length != 0) {
-      const newNote = [...notes];
-      newNote.push({
-        id: crypto.randomUUID(),
-        title: titleText.trim(),
-        text: noteText.trim(),
-        date: dayjs().format('MMMM DD, YYYY')
-      });
+      let newNote = [];
+      if (id === '-1') {
+        newNote = [...notes];
+        newNote.push({
+          id: crypto.randomUUID(),
+          title: titleText.trim(),
+          text: noteText.trim(),
+          date: dayjs().format('MMMM DD, YYYY')
+        });
+      } else {
+        notes.forEach(note => {
+          if (note.id !== id)
+            newNote.push(note);
+          else {
+            newNote.push({
+              id: id,
+              title: titleText.trim(),
+              text: noteText.trim(),
+              date: dayjs().format('MMMM DD, YYYY')
+            });
+          }
+        });
+      }
       setNotes(newNote);
       navigate('/');
     }
@@ -35,13 +60,13 @@ export function NoteFormPage({ notes, setNotes }) {
   return (
     <div className="note-form-container">
       <div className='noteform-header'>
-        <input onChange={saveTitleInputText} type="text" placeholder="Title..." className="title-input" />
+        <input value={titleText} onChange={saveTitleInputText} type="text" placeholder="Title..." className="title-input" />
         <div className='noteform-btns'>
           <button onClick={saveNote}>Save</button>
           <button onClick={() => navigate('/')}>Cancel</button>
         </div>
       </div>
-      <textarea onChange={saveNoteText} placeholder="Start typing here..." className="note-textarea"/>
+      <textarea value={noteText} onChange={saveNoteText} placeholder="Start typing here..." className="note-textarea" />
     </div>
   );
 }
